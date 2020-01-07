@@ -4,6 +4,14 @@ import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from 'axios';
 import CreateAccount from "./CreateAccount";
+import styled from 'styled-components';
+import "../App.css";
+
+const FormDiv = styled.div`
+    width: 75%;
+    margin: auto;
+    height: 60vh;
+`;
 
 const SignInForm = ({ values, errors, touched, status }) => {
   document.title = "Sign In | SHNT";
@@ -11,20 +19,26 @@ const SignInForm = ({ values, errors, touched, status }) => {
   const [signIn, setSignIn] = useState([]);
 
   return (
-    <div className="App">
+    <FormDiv>
       <Form>
+          <p>E-Mail:</p>
         <label htmlFor="email">
-          E-Mail:
           <Field id="email" type="text" name="email" />
           {touched.email && errors.email && <p>{errors.email}</p>}
         </label>
+        <p>Password:</p>
         <label htmlFor="password">
-            Password:
             <Field id="password" type="password" name="password" />
   {touched.email && errors.password && <p>{errors.password}</p>}
         </label>
+        <br></br>
+        <button type="submit">Log In</button>
       </Form>
-    </div>
+      <p>OR</p>
+      <hr/>
+      <Link to="/createaccount"><button>Create Account</button></Link>
+      <Route exact path="/createaccount" component={CreateAccount} />
+    </FormDiv>
   );
 };
 
