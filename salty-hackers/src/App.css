@@ -66,8 +66,17 @@ button {
   color: #fff;
   cursor: pointer;
   outline: none;
+  text-decoration: none;
   -webkit-appearance: none;
+
 }
+
+  .back-to-signin {
+    width: 10%;
+    font-size: .6em;
+    padding: 1%;
+
+  }
 
   .copyright {
     margin-right: -20%;
@@ -87,6 +96,12 @@ button {
   outline: none;
 }
 
+.forgot {
+  text-decoration: underline;
+  font-size: .7em;
+  width: 15%;
+}
+
   @media (max-width: 800px) {
     .form-field {
       width: 40%;
@@ -97,6 +112,10 @@ button {
       margin-left: 45.5%;
       margin-right: -10%;
     }
+
+    .back-to-signin {
+      width: 20%;
+    }
   }
 
   @media (max-width: 500px) {
@@ -106,6 +125,10 @@ button {
 
     button {
       font-size: 75%;
+    }
+
+    .back-to-signin {
+      width: 25%;
     }
 
     .Copyright {

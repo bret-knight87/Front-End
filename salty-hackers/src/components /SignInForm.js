@@ -11,6 +11,7 @@ const FormDiv = styled.div`
   width: 75%;
   margin: auto;
   height: 60vh;
+  padding: 1%;
 
   hr {
     border: solid 1px #264653;
@@ -37,11 +38,10 @@ const SignInForm = ({ values, errors, touched, status }) => {
 
   const [signIn, setSignIn] = useState([]);
 
-
   return (
     <FormDiv>
       <Form>
-        <p>E-Mail:</p>
+        <p>Email:</p>
         <label htmlFor="email">
           <Field id="email" type="text" name="email" className="form-field" />
           {touched.email && errors.email && (
@@ -61,14 +61,22 @@ const SignInForm = ({ values, errors, touched, status }) => {
           )}
         </label>
         <br></br>
-        <button type="submit">Log In</button>
+        <button className="Button" type="submit">
+          Log In
+        </button>
+        <p>
+          <a href="#forgotpassword" className="forgot">
+            Forgot Password?
+          </a>
+        </p>
+        <br></br>
       </Form>
       <p>OR</p>
       <hr />
+      <br></br>
       <Link to="/createaccount">
         <button>Create Account</button>
       </Link>
-      <Route exact path="/createaccount" component={CreateAccountForm} />
     </FormDiv>
   );
 };
@@ -82,7 +90,7 @@ const FormikSignInForm = withFormik({
   },
 
   validationSchema: Yup.object().shape({
-    email: Yup.string().required("E-mail is required!"),
+    email: Yup.string().required("Email is required!"),
     password: Yup.string().required("Password is required!"),
   }),
 

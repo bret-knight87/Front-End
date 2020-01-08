@@ -62,6 +62,9 @@ const CreateAccountForm = ({ values, errors, touched, status }) => {
         <br></br>
         <button type="submit">Log In</button>
         </Form>
+        <Link to="/">
+          <button className="back-to-signin">Go Back to Sign In</button>
+      </Link>
     </FormDiv>
   );
 };
