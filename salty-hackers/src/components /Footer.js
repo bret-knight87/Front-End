@@ -43,13 +43,13 @@ export default function FooterMain() {
         <p className="Copyright">&copy; 2020 SHNT!</p>
         <FooterNav>
           <p>
-            <a className="Foot-nav" href="#home">
+            <a className="Foot-nav" href="https://shnt3-splash.netlify.com/">
               Home
             </a>
           </p>
           <p>|</p>
           <p>
-            <a className="Foot-nav" href="#about">
+            <a className="Foot-nav" href="https://shnt3-splash.netlify.com/about.html">
               About
             </a>
           </p>

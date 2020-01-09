@@ -78,7 +78,7 @@ export default function Header() {
       <Title>SHN Trolls!</Title>
       <HeadNav>
         <p>
-        <a href="#home" className="Foot-nav">Home</a>
+        <a href="https://shnt3-splash.netlify.com/" className="Foot-nav">Home</a>
         </p>
         <p>|</p>
         <p>
