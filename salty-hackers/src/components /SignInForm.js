@@ -73,7 +73,6 @@ const SignInForm = ({ values, errors, touched, status }) => {
       </Form>
       <p>OR</p>
       <hr />
-      <br></br>
       <Link to="/createaccount">
         <button>Create Account</button>
       </Link>

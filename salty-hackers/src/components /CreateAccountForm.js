@@ -55,15 +55,27 @@ const CreateAccountForm = ({ values, errors, touched, status }) => {
             name="password"
             className="form-field"
           />
-          {touched.email && errors.password && (
+          {touched.password && errors.password && (
             <p className="Form-error">{errors.password}</p>
           )}
         </label>
+        <p>Verify Password:</p>
+        <label htmlFor="verifypassword">
+          <Field
+            id="verifypassword"
+            type="password"
+            name="verifypassword"
+            className="form-field"
+          />
+          {touched.verifypassword && errors.verifypassword && (
+            <p className="Form-error">{errors.verifypassword}</p>
+          )}
+        </label>
         <br></br>
-        <button type="submit">Log In</button>
-        </Form>
-        <Link to="/">
-          <button className="back-to-signin">Go Back to Sign In</button>
+        <button type="submit">Create Account</button>
+      </Form>
+      <Link to="/">
+        <button className="back-to-signin">Go Back to Sign In</button>
       </Link>
     </FormDiv>
   );
@@ -74,12 +86,16 @@ const FormikCreateAccountForm = withFormik({
     return {
       email: props.email || "",
       password: props.password || "",
+      verifypassword: props.verifypassword || "",
     };
   },
 
   validationSchema: Yup.object().shape({
     email: Yup.string().required("E-mail is required!"),
-    password: Yup.string().required("Password is required!"),
+    password: Yup.string().min(8, "Password must be at least 8 characters!").required("Password is required!"),
+    verifypassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match!")
+      .required("Verify password is required!")
   }),
 
   handleSubmit(values, { setStatus, resetForm }) {
