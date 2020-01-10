@@ -1,13 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Route } from "react-router-dom";
+import Header from "./components /Header"
+import FooterMain from "./components /Footer";
+import SignInForm from "./components /SignInForm";
+import CreateAccountForm from "./components /CreateAccountForm";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <h1>Need salt with that?</h1>
+      <Header />
+      <Route exact path="/" component={SignInForm} />
+      <Route exact path="/createaccount" component={CreateAccountForm} />
+      <FooterMain />  
     </div>
   );
 }
 
-export default App;
