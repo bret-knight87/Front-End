@@ -99,10 +99,10 @@ const FormikSignInForm = withFormik({
 
   handleSubmit(values, { setStatus, resetForm }) {
     axios
-      .post("https://reqres.in/api/users/", values)
+      .post("https://salt-comments.herokuapp.com/api/auth/login", values)
       .then(res => {
-        console.log("success", res);
-        setStatus(res.data)
+        console.log(res.data);
+        setStatus(res.data);
         resetForm();
       })
       .catch(err => console.log(err.response));

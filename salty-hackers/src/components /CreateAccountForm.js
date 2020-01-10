@@ -63,7 +63,7 @@ const CreateAccountForm = ({ values, errors, touched, status }) => {
             <p className="Form-error">{errors.password}</p>
           )}
         </label>
-        <p>Verify Password:</p>
+        {/* <p>Verify Password:</p>
         <label htmlFor="verifypassword">
           <Field
             id="verifypassword"
@@ -74,7 +74,7 @@ const CreateAccountForm = ({ values, errors, touched, status }) => {
           {touched.verifypassword && errors.verifypassword && (
             <p className="Form-error">{errors.verifypassword}</p>
           )}
-        </label>
+        </label> */}
         <br></br>
         <button type="submit">Create Account</button>
       </Form>
@@ -90,21 +90,22 @@ const FormikCreateAccountForm = withFormik({
     return {
       username: props.username || "",
       password: props.password || "",
-      verifypassword: props.verifypassword || "",
+      // verifypassword: props.verifypassword || "",
     };
   },
 
   validationSchema: Yup.object().shape({
     username: Yup.string().required("Username is required!"),
     password: Yup.string().min(8, "Password must be at least 8 characters!").required("Password is required!"),
-    verifypassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Passwords must match!")
-      .required("Verify password is required!")
+    // verifypassword: Yup.string()
+    //   .oneOf([Yup.ref("password"), null], "Passwords must match!")
+    //   .required("Verify password is required!")
   }),
 
   handleSubmit(values, { setStatus, resetForm }) {
     axios
-      .post("https://reqres.in/api/users/", values)
+      .post("https://salt-comments.herokuapp.com/api/auth/register", values)
+      .then(console.log(values))
       .then(res => {
         console.log("success", res);
         setStatus(res.data)
