@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import CreateAccountForm from "./CreateAccountForm";
 import styled from "styled-components";
 import "../App.css";
 
@@ -38,14 +37,19 @@ const SignInForm = ({ values, errors, touched, status }) => {
 
   const [signIn, setSignIn] = useState([]);
 
+  useEffect(() => {
+    console.log("status has changed!", status);
+    status && setSignIn(signIn => [...signIn, status]);
+  }, [status]);
+
   return (
     <FormDiv>
       <Form>
-        <p>Email:</p>
-        <label htmlFor="email">
-          <Field id="email" type="text" name="email" className="form-field" />
-          {touched.email && errors.email && (
-            <p className="Form-error">{errors.email}</p>
+        <p>Username:</p>
+        <label htmlFor="username">
+          <Field id="username" type="text" name="username" className="form-field" />
+          {touched.username && errors.username && (
+            <p className="Form-error">{errors.username}</p>
           )}
         </label>
         <p>Password:</p>
@@ -83,13 +87,13 @@ const SignInForm = ({ values, errors, touched, status }) => {
 const FormikSignInForm = withFormik({
   mapPropsToValues(props) {
     return {
-      email: props.email || "",
+      username: props.username || "",
       password: props.password || "",
     };
   },
 
   validationSchema: Yup.object().shape({
-    email: Yup.string().required("Email is required!"),
+    username: Yup.string().required("Username is required!"),
     password: Yup.string().required("Password is required!"),
   }),
 
@@ -98,7 +102,7 @@ const FormikSignInForm = withFormik({
       .post("https://reqres.in/api/users/", values)
       .then(res => {
         console.log("success", res);
-
+        setStatus(res.data)
         resetForm();
       })
       .catch(err => console.log(err.response));

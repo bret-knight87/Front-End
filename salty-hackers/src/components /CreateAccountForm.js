@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import styled from "styled-components";
 import "../App.css";
-import SignInForm from "./SignInForm";
 
 const FormDiv = styled.div`
   width: 75%;
@@ -37,14 +36,19 @@ const CreateAccountForm = ({ values, errors, touched, status }) => {
 
   const [createAccount, setCreateAccount] = useState([]);
 
+  useEffect(() => {
+    console.log("status has changed!", status);
+    status && setCreateAccount(createAccount => [...createAccount, status]);
+  }, [status]);
+
   return (
     <FormDiv>
       <Form>
-        <p>E-mail:</p>
-        <label htmlFor="email">
-          <Field id="email" type="text" name="email" className="form-field" />
-          {touched.email && errors.email && (
-            <p className="Form-error">{errors.email}</p>
+        <p>Username:</p>
+        <label htmlFor="username">
+          <Field id="username" type="text" name="username" className="form-field" />
+          {touched.username && errors.username && (
+            <p className="Form-error">{errors.username}</p>
           )}
         </label>
         <p>Password:</p>
@@ -84,14 +88,14 @@ const CreateAccountForm = ({ values, errors, touched, status }) => {
 const FormikCreateAccountForm = withFormik({
   mapPropsToValues(props) {
     return {
-      email: props.email || "",
+      username: props.username || "",
       password: props.password || "",
       verifypassword: props.verifypassword || "",
     };
   },
 
   validationSchema: Yup.object().shape({
-    email: Yup.string().required("E-mail is required!"),
+    username: Yup.string().required("Username is required!"),
     password: Yup.string().min(8, "Password must be at least 8 characters!").required("Password is required!"),
     verifypassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match!")
@@ -103,7 +107,7 @@ const FormikCreateAccountForm = withFormik({
       .post("https://reqres.in/api/users/", values)
       .then(res => {
         console.log("success", res);
-
+        setStatus(res.data)
         resetForm();
       })
       .catch(err => console.log(err.response));

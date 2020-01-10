@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const GlobalStyles = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap');
@@ -74,7 +74,7 @@ export default function Header() {
   return (
     <HeadContainer>
       <GlobalStyles />
-      <img src="/imgs/trollmain.jpg" />
+      <img src="/imgs/trollmain.jpg" alt="The SHN Troll!"/>
       <Title>SHN Trolls!</Title>
       <HeadNav>
         <p>
